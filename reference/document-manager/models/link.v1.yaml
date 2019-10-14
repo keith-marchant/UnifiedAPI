@@ -1,0 +1,10 @@
+title: Link
+type: object
+properties:
+  Url:
+    type: string
+    format: uri
+  Expiration:
+    type: string
+    format: date
+description: Download URL for a given document

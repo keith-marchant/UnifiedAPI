@@ -1,0 +1,16 @@
+title: Document
+type: object
+properties:
+  DocumentId:
+    type: string
+  FileName:
+    type: string
+  ContentType:
+    type: string
+  Created:
+    type: string
+    format: date
+  Size:
+    type: number
+  Link:
+    $ref: ./link.v1.yaml

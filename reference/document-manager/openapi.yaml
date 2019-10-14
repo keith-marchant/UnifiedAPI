@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: Document Manager
+  version: '1.0'
+  description: 'Manage, transform, and retrieve documents.'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /documents:
+    post:
+      summary: Create document
+      tags:
+        - Document
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: ./models/document.v1.yaml
+        '500':
+          description: Internal Server Error
+      security:
+        - Access Token: []
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: object
+                expiration:
+                  type: string
+                  format: date-time
+            examples: {}
+        description: File contents uploaded as `IFormFile` object and optional deletion time.
+      description: Upload a document with an optional deletion timespan
+  '/documents/{documentId}':
+    parameters:
+      - type: string
+        name: documentId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Document Id in GUID format
+    get:
+      summary: Get document details
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/document.v1.yaml
+        '404':
+          description: Not Found
+      description: Get metadata and download link for the document
+      security:
+        - Access Token: []
+    delete:
+      summary: Delete document
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      description: Delete a given documentId
+      security:
+        - Access Token: []
+  '/documents/{documentId}/content':
+    parameters:
+      - type: string
+        name: documentId
+        in: path
+        required: true
+    get:
+      summary: Get document bytes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+              description: Filename of document
+              required: true
+        '404':
+          description: Not Found
+      security:
+        - Access Token: []
+      description: 'Download the document content. Not recommended, please use the download link provided by the `GET` endpoint.'
+components:
+  schemas: {}
+  securitySchemes:
+    Access Token:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: ''
+          tokenUrl: ''
+          scopes: []
