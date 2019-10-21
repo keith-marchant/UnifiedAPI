@@ -1,8 +1,10 @@
 title: Document
 type: object
+description: Basic file metadata for a stored document with optional download links
 properties:
   DocumentId:
     type: string
+    format: uuid
   FileName:
     type: string
   ContentType:
@@ -14,3 +16,9 @@ properties:
     type: number
   Link:
     $ref: ./link.v1.yaml
+required:
+  - DocumentId
+  - FileName
+  - ContentType
+  - Created
+  - Size

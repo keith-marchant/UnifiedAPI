@@ -17,7 +17,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/document.v1.yaml
+                $ref: ../common/models/document.v1.yaml
         '500':
           description: Internal Server Error
       security:
@@ -55,7 +55,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/document.v1.yaml
+                $ref: ../common/models/document.v1.yaml
         '404':
           description: Not Found
       description: Get metadata and download link for the document

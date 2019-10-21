@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Document Conversion Manager
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/documents/{documentId}/convert/{fromFormat}/{toFormat}':
+    parameters:
+      - type: string
+        name: documentId
+        in: path
+        required: true
+      - type: string
+        name: fromFormat
+        in: path
+        required: true
+      - type: string
+        name: toFormat
+        in: path
+        required: true
+    post:
+      summary: ''
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: ../common/models/document.v1.yaml
+      description: Convert a document from one format to another using parameters provided.
+      security:
+        - OAuth2: []
+components:
+  schemas: {}
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: ''
+          tokenUrl: ''
+          refreshUrl: ''
+          scopes: []

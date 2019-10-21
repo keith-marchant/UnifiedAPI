@@ -1,0 +1,11 @@
+title: DocumentTemplate
+type: object
+properties:
+  templateId:
+    type: string
+    format: uuid
+  category:
+    type: string
+required:
+  - templateId
+  - category

@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: Template Manager
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /documenttemplates:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+  '/documenttemplates/{templateId}':
+    parameters:
+      - type: string
+        name: templateId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+    put:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+  '/documenttemplates/{templateId}/render':
+    parameters:
+      - type: string
+        name: templateId
+        in: path
+        required: true
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../common/models/document.v1.yaml
+      security:
+        - OAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  /documenttemplates/categories:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      description: List all categories available for document templates
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+      description: Create a new category
+    delete:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+      description: Delete a category. Note that this operation will be prevented if there are active templates assigned to the category.
+components:
+  schemas: {}
+  securitySchemes:
+    OAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: ''
+          tokenUrl: ''
+          refreshUrl: ''
+          scopes: []

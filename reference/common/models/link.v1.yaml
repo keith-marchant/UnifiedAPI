@@ -1,5 +1,6 @@
 title: Link
 type: object
+description: Download URL for a given document
 properties:
   Url:
     type: string
@@ -7,4 +8,6 @@ properties:
   Expiration:
     type: string
     format: date
-description: Download URL for a given document
+required:
+  - Url
+  - Expiration
